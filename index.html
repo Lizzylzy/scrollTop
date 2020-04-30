@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部（带缓冲效果）</title>
+    <style>
+        body {
+            height: 2000px;
+            background-color: #E4D3DA;
+        }
+        h1 {
+            text-align: center;
+            font-weight: 900;
+            color: #fff;
+        }
+        a {
+            text-decoration: none;
+        }
+        #btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 45px;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            line-height: 45px;
+            background-color: #F1B20B;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+        }
+        #btn:hover {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background-color: #F2DA16;
+            line-height: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let btn = document.getElementById('btn');
+            //兼容性写法
+            let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            let timer = null;
+            btn.onclick = function() {
+                timer = setInterval(function(){
+                    //兼容性写法
+                    let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                    //速度
+                    let speed = Math.floor(-scrollTop/6);
+                    //scrollTop逐渐减少
+                    document.documentElement.scrollTop = document.body.scrollTop = scrollTop + speed;
+                    if (scrollTop == 0) {
+                        //清除定时器
+                        clearInterval(timer);
+                    }
+                }, 50);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <a href="javaScript:void(0)" id="btn" title="回到顶部">TOP</a>
+</body>
+</html>
